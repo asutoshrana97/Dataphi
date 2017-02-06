@@ -37,11 +37,11 @@
 		$sql = "INSERT INTO patients ( `firstname`, `lastname`, `age`, `dob`, `gender`, `phone`, `desp`) VALUES (\"$firstname\", \"$lastname\", $age, \"$dob\", \"$gender\", $contact, \"$desc\")";
 
 		echo $sql;
-		/*if(!mysqli_query($connect, $sql)){
+		if(!mysqli_query($connect, $sql)){
 			echo "Error inserting data";
-		}*/
+		}
 
-		//header("Location:index.html");
+		header("Location:index.html");
 	}
 	//echo "hello";
 ?>
