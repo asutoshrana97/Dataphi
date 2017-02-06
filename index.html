@@ -64,7 +64,7 @@
 						<label class="blue-text" for="age1">Enter your age</label>
 					</div>
 					<div class="input-field col s6">
-						<input id="DOB" name="DOB" type="date" class="datepicker">
+						<input id="DOB" name="DOB" type="date" class="datepicker" value = "6 February, 2017" >
 						<label class="blue-text" for="DOB">Date Of Birth</label>
 					</div>
 				</div>
@@ -95,11 +95,19 @@
 
 	  <script type="text/javascript">
 	  	
+	  		var date_selected = false;
 	  		$('.datepicker').pickadate({
 			    required : true,
 			    selectMonths: true, // Creates a dropdown to control month
 			    selectYears: 150, // Creates a dropdown of 15 years to control year
-			    format: 'yyyymmdd'
+			    formatSubmit: 'yyyy/mm/dd',
+			    hiddenName: true,
+			    onSet: function( arg ){
+			        if ( 'select' in arg ){ //prevent closing on selecting month/year
+			            this.close();date_selected=true;
+			        }
+			    }
+
 			});
 
 			$(document).ready(function() {
@@ -108,12 +116,6 @@
 
 			function validate(){
 
-				if( document.details.DOB.value=='')
-		         {
-		         	alert( "Enter Date of Birth!" );
-		         	document.details.DOB.focus();
-		         	return false;
-		         }
 				if( document.details.first_name.value == "" )
 		         {
 		            alert( "Please provide your first name!" );
@@ -131,7 +133,13 @@
 		         	alert( "Enter a Valid age!" );
 		         	document.details.age.focus();
 		         	return false;
-		         }		         
+		         }
+		         if( date_selected==false){
+		         	alert(" Please enter Date of Birth! " );
+		         	document.details.DOB.focus();
+		         	return false;
+		         }
+
 		         if( document.details.phone.value == "" ||
 			         isNaN( document.details.phone.value ) ||
 			         document.details.phone.value.length < 10 )
