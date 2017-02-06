@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Coding Challenge - DataPhi Labs</title>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<style>
+			body{
+				background-image: url('images/bg2.jpg');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 100%;
+			}	
+		</style>
+	</head>
+
+	<body>
+	<!-- Top Navigation panel -->
+
+		<div class="row">
+			<header>
+			  <nav class="blue">
+			    <div class="container col s9">
+			      <div class="nav-wrapper col offset-s1">
+			        <a href="index.html" class="brand-logo">Patients</a>
+			      </div>			      
+			    </div>
+			    <div class="right hide-on-med-and-down">
+				      <ul id="nav-mobile">
+				        <li class="active"><a href="index.html">Add Patient Details</a></li>
+				        <li><a href="search.php">Search Patient Directory</a></li>
+				       </ul>
+			      </div>
+			  </nav>
+			</header>
+			
+        </div>
+
+        <div class="container"><div class="row">
+        <div class="col s10 offset-s1" style="border-style: outset;background-color: #f0f0f0;">
+	        <center>
+	        	<p style="font-family: 'Palatino Linotype';font-size: 35px;text-shadow: 2px 2px #fff0f0">
+	        		Enter Details of Patient
+	        	</p>
+	        </center>
+		    <form name="details" method="GET" action="save.php" onsubmit="return(validate());">
+		    	<div class="section">
+				<div class="row">
+					<div class="input-field col s6">
+						<input name="first_name" id="first_name" type="text" class="validate">
+						<label class="blue-text" for="first_name">First Name</label>
+					</div>
+					<div class="input-field col s6">
+						<input name="last_name" id="last_name" type="text" class="validate">
+						<label class="blue-text" for="last_name">Last Name</label>
+					</div>
+				</div></div>
+				<div class="section">
+				<div class="row">
+					<div class="input-field col s6">
+						<input type="number" name="age1" id="age1" class="validate">
+						<label class="blue-text" for="age1">Enter your age</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="DOB" name="DOB" type="date" class="datepicker">
+						<label class="blue-text" for="DOB">Date Of Birth</label>
+					</div>
+				</div>
+				<div class="section"><div class="row">
+					<div class="input-field col s6">
+						<select name="gender" id="gender">
+					      <option value="" disabled selected>--Select Gender--</option>
+					      <option value="Male" >Male</option>
+					      <option value="Female" >Female</option>
+					      <option value="Other" >Other</option>
+					    </select>
+					    <label for="gender" class="blue-text" >Select Gender</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="number" name="phone" id="phone" class="validate">
+						<label class="blue-text"  for="phone">Contact Number</label>
+					</div>
+				</div></div>
+				<div class="section">
+				<div class="input-field col s12">
+					<textarea id="freetext" name="desc" class="materialize-textarea" data-length="150"></textarea>
+            		<label class="blue-text" for="freetext">Description</label>
+				</div>
+				</div>
+				<center><button class="waves-effect waves-light btn" name="submit" type="submit">Submit</button></center>
+		    </form>
+	  </div></div></div>
+
+	  <script type="text/javascript">
+	  	
+	  		$('.datepicker').pickadate({
+			    required : true,
+			    selectMonths: true, // Creates a dropdown to control month
+			    selectYears: 150, // Creates a dropdown of 15 years to control year
+			    format: 'yyyymmdd'
+			});
+
+			$(document).ready(function() {
+			    $('select').material_select();
+			});
+
+			function validate(){
+
+				if( document.details.DOB.value=='')
+		         {
+		         	alert( "Enter Date of Birth!" );
+		         	document.details.DOB.focus();
+		         	return false;
+		         }
+				if( document.details.first_name.value == "" )
+		         {
+		            alert( "Please provide your first name!" );
+		            document.details.first_name.focus() ;
+		            return false;
+		         }
+		         if( document.details.last_name.value == "" )
+		         {
+		            alert( "Please provide a valid last name!" );
+		            document.details.last_name.focus() ;
+		            return false;
+		         }
+		         if( document.details.age.value=="" || document.details.age.value < 5 || document.details.age.value > 150 )
+		         {
+		         	alert( "Enter a Valid age!" );
+		         	document.details.age.focus();
+		         	return false;
+		         }		         
+		         if( document.details.phone.value == "" ||
+			         isNaN( document.details.phone.value ) ||
+			         document.details.phone.value.length < 10 )
+		         {
+		            alert( "Contact number is incorrect!" );
+		            document.details.phone.focus() ;
+		            return false;
+		         }
+
+			}
+	  	
+	  </script>
+	</body>
+
+</html>
